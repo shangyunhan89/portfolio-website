@@ -27,6 +27,16 @@ function SectionTitle({ eyebrow, title, action }: { eyebrow: string; title: stri
   );
 }
 
+function WindowChrome() {
+  return (
+    <div className="window-chrome" aria-hidden="true">
+      <div className="window-dots"><i /><i /><i /></div>
+      <div className="window-title">⚓ MARA TIDE // CREATIVE PORTFOLIO ⚓</div>
+      <div className="window-actions"><span>♥</span><b>—</b><b>□</b><b>×</b></div>
+    </div>
+  );
+}
+
 function Navigation() {
   return (
     <header className="topbar">
@@ -42,8 +52,6 @@ function Navigation() {
 function Hero() {
   return (
     <section className="hero" id="home">
-      <img src="/images/captain-hero.png" alt="Pixel-art mint-haired captain sailing a small boat toward a lighthouse" />
-      <div className="hero-shade" />
       <motion.div className="hero-copy" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
         <span className="speech-chip">AHOY! <b>✦</b></span>
         <p className="kicker">CREATIVE CAPTAIN · DIGITAL EXPLORER</p>
@@ -51,7 +59,10 @@ function Hero() {
         <p className="hero-note">Part product designer, part creative coder — always charting a course toward useful, playful experiences.</p>
         <div className="hero-actions"><PixelButton href="#projects">Explore my work</PixelButton><PixelButton href="#contact" variant="light">Send a signal</PixelButton></div>
       </motion.div>
-      <div className="coordinate-chip">LAT 36.8° N · LONG 174.7° E</div>
+      <figure className="hero-art">
+        <img src="/images/captain-hero.png" alt="Pixel-art mint-haired captain sailing a small boat toward a lighthouse" />
+        <figcaption><span>● SEA: CALM</span><span>☼ 24°C</span><span>WIND: W</span></figcaption>
+      </figure>
     </section>
   );
 }
@@ -131,5 +142,5 @@ function Contact() {
 }
 
 export function PortfolioHome() {
-  return <main><div className="game-shell"><Navigation /><Hero /><section className="intro-grid"><CaptainStatus /><About /></section><Projects /><section className="lower-grid"><Skills /><Journey /></section><Contact /></div></main>;
+  return <main><div className="game-shell"><WindowChrome /><Navigation /><Hero /><section className="intro-grid"><CaptainStatus /><About /></section><Projects /><section className="lower-grid"><Skills /><Journey /></section><Contact /></div></main>;
 }
