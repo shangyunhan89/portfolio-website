@@ -177,8 +177,12 @@ img { display: block; max-width: 100%; }
   .project-card { display: block; }
   .project-image { aspect-ratio: 4/3; border-right: 0; border-bottom: 3px solid var(--navy); }
   .skill-grid { grid-template-columns: repeat(2, 1fr); }
-  .journey-line { grid-template-columns: repeat(2, 1fr); gap: 24px 8px; }
-  .journey-route, .journey-boat { display: none; }
+  .journey-line { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+  .journey-route { display: block; height: 42px; }
+  .journey-boat { display: block; width: 44px; height: 44px; margin-left: -22px; }
+  .journey-icon { width: 42px; height: 42px; font-size: 18px; }
+  .journey-stop strong { font-size: 8px; }
+  .journey-stop small { max-width: 74px; font-size: 8px; }
   .contact { grid-template-columns: 1fr; padding: 34px 22px 18px; }
   .contact-actions { justify-items: start; }
   .footer-row { flex-direction: column; }

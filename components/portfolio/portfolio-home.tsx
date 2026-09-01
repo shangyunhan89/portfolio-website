@@ -147,7 +147,7 @@ function Journey({ reduceMotion }: { reduceMotion: boolean }) {
         <svg className="journey-route" viewBox="0 0 100 22" preserveAspectRatio="none" aria-hidden="true">
           <motion.path
             d="M6 11 C18 2 28 20 40 11 S63 2 76 11 S88 18 95 11"
-            initial={false}
+            initial={reduceMotion ? { pathLength: 1 } : { pathLength: 0 }}
             animate={reduceMotion ? { pathLength: 1 } : { pathLength: [0, 0.18, 0.38, 0.58, 0.78, 0.9, 1, 1, 0] }}
             transition={{ duration: 9.5, times: routeTimes, repeat: Infinity, ease: 'linear' }}
           />
@@ -156,7 +156,7 @@ function Journey({ reduceMotion }: { reduceMotion: boolean }) {
           className="journey-boat"
           src="/images/journey-boat.png"
           alt=""
-          initial={false}
+          initial={reduceMotion ? { left: '6%', top: 6, opacity: 1 } : { left: '6%', top: 6, opacity: 0 }}
           animate={reduceMotion ? { left: '6%', top: 6, opacity: 1 } : {
             left: ['6%', '23%', '40%', '58%', '76%', '86%', '95%', '95%', '6%'],
             top: [6, -4, 6, -4, 6, 14, 6, 6, 6],
