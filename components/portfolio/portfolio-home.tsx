@@ -197,7 +197,7 @@ function Journey({ reduceMotion }: { reduceMotion: boolean }) {
 function Contact({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <section className="contact" id="contact">
-      <div><span className="section-eyebrow light">OPEN CHANNEL</span><h2>Ready for a new adventure?</h2><p>I’m always happy to hear about thoughtful products, curious collaborations, or a particularly good ocean fact.</p></div>
+      <div><span className="section-eyebrow light">OPEN CHANNEL</span><h2>Ready for a new adventure?</h2><p>I’m always happy to hear about thoughtful products, curious collaborations, or new adventures we might set sail on together.</p></div>
       <div className="contact-actions"><PixelButton href="shangyunhan89@gmail.com" reduceMotion={reduceMotion}>Send a message</PixelButton><a href="#home">Back to top ↑</a></div>
       <div className="footer-row"><span>© 2026 SYH.tide</span><span>MADE WITH ♡ + REACT</span><span>CALM SEAS · FULL HEART</span></div>
     </section>
