@@ -75,7 +75,7 @@ function Hero({ reduceMotion }: { reduceMotion: boolean }) {
       <motion.div className="hero-copy" initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
         <span className="speech-chip">AHOY! <b>✦</b></span>
         <p className="kicker">CREATIVE CAPTAIN · DIGITAL EXPLORER</p>
-        <h1>I design delightful things for the <em>digital sea.</em></h1>
+        <h1>I design delightful<br />things for the<br /><em>digital sea.</em></h1>
         <p className="hero-note">Part product designer, part creative coder — always charting a course toward useful, playful experiences.</p>
         <div className="hero-actions"><PixelButton href="#projects" reduceMotion={reduceMotion}>Explore my work</PixelButton><PixelButton href="#contact" variant="light" reduceMotion={reduceMotion}>Send a signal</PixelButton></div>
       </motion.div>
