@@ -71,10 +71,6 @@ function Hero({ reduceMotion }: { reduceMotion: boolean }) {
             transition={{ duration: 3.6 + sparkle * 0.55, delay: sparkle * 0.6, repeat: Infinity, ease: 'easeInOut' }}
           >✦</motion.span>
         ))}
-        <div className="ocean-motion">
-          <motion.i className="wave-strip wave-back" animate={reduceMotion ? undefined : { x: [-28, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'linear' }} />
-          <motion.i className="wave-strip wave-front" animate={reduceMotion ? undefined : { x: [0, -36] }} transition={{ duration: 10, repeat: Infinity, ease: 'linear' }} />
-        </div>
       </div>
       <motion.div className="hero-copy" initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
         <span className="speech-chip">AHOY! <b>✦</b></span>
@@ -142,13 +138,32 @@ function Skills() {
 }
 
 function Journey({ reduceMotion }: { reduceMotion: boolean }) {
+  const routeTimes = [0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.82, 0.92, 1];
+
   return (
     <section className="pixel-panel journey-panel" id="journey">
       <SectionTitle eyebrow="ROUTE SO FAR" title="Journey Log" action="Adventure continues" />
       <div className="journey-line">
         <svg className="journey-route" viewBox="0 0 100 22" preserveAspectRatio="none" aria-hidden="true">
-          <motion.path d="M6 11 C18 2 28 20 40 11 S63 2 76 11 S88 18 95 11" initial={false} animate={reduceMotion ? undefined : { strokeDashoffset: [0, -24] }} transition={{ duration: 4.5, repeat: Infinity, ease: 'linear' }} />
+          <motion.path
+            d="M6 11 C18 2 28 20 40 11 S63 2 76 11 S88 18 95 11"
+            initial={false}
+            animate={reduceMotion ? { pathLength: 1 } : { pathLength: [0, 0.18, 0.38, 0.58, 0.78, 0.9, 1, 1, 0] }}
+            transition={{ duration: 9.5, times: routeTimes, repeat: Infinity, ease: 'linear' }}
+          />
         </svg>
+        <motion.img
+          className="journey-boat"
+          src="/images/journey-boat.png"
+          alt=""
+          initial={false}
+          animate={reduceMotion ? { left: '6%', top: 6, opacity: 1 } : {
+            left: ['6%', '23%', '40%', '58%', '76%', '86%', '95%', '95%', '6%'],
+            top: [6, -4, 6, -4, 6, 14, 6, 6, 6],
+            opacity: [0, 1, 1, 1, 1, 1, 1, 0, 0],
+          }}
+          transition={{ duration: 9.5, times: routeTimes, repeat: Infinity, ease: 'linear' }}
+        />
         {journey.map((stop) => <div className="journey-stop" key={stop.year}><span className="journey-icon">{stop.icon}</span><b>{stop.year}</b><strong>{stop.title}</strong><small>{stop.note}</small></div>)}
       </div>
     </section>

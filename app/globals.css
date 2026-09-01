@@ -64,10 +64,6 @@ img { display: block; max-width: 100%; }
 .sparkle-2 { top: 23%; right: 43%; font-size: 10px; }
 .sparkle-3 { top: 39%; right: 14%; font-size: 12px; }
 .sparkle-4 { top: 9%; right: 5%; font-size: 9px; }
-.ocean-motion { position: absolute; left: -5%; right: -5%; bottom: 0; height: 92px; overflow: hidden; opacity: .26; }
-.wave-strip { position: absolute; left: -44px; display: block; width: calc(100% + 88px); height: 30px; background-image: radial-gradient(ellipse at 50% 100%, transparent 0 42%, #fff9e8 45% 53%, transparent 56%); background-repeat: repeat-x; }
-.wave-back { bottom: 31px; background-size: 56px 24px; opacity: .55; }
-.wave-front { bottom: 7px; background-size: 72px 28px; opacity: .75; }
 .hero-copy { position: relative; z-index: 2; width: min(590px, 58%); padding: clamp(78px, 11vw, 128px) 0 70px clamp(26px, 5vw, 62px); color: white; text-shadow: 3px 3px 0 #263471; }
 .speech-chip { display: inline-block; margin-bottom: 24px; padding: 10px 14px; color: var(--coral-dark); background: var(--cream); border: 3px solid var(--navy); box-shadow: 4px 4px 0 var(--coral); font-size: 18px; font-weight: 900; text-shadow: none; }
 .speech-chip b { color: #f3c269; }
@@ -134,6 +130,7 @@ img { display: block; max-width: 100%; }
 .journey-line { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding-top: 8px; }
 .journey-route { position: absolute; z-index: 0; top: 8px; left: 0; width: 100%; height: 48px; overflow: visible; }
 .journey-route path { fill: none; stroke: var(--navy); stroke-width: 1.25; stroke-linecap: round; stroke-dasharray: 3 6; vector-effect: non-scaling-stroke; opacity: .68; }
+.journey-boat { position: absolute; z-index: 3; width: 52px; height: 52px; margin-left: -26px; object-fit: contain; image-rendering: pixelated; pointer-events: none; filter: drop-shadow(2px 3px 0 #8797bd); }
 .journey-stop { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .journey-icon { position: relative; z-index: 2; display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 10px; color: var(--navy); background: var(--cream); border: 3px solid var(--navy); box-shadow: 3px 3px 0 var(--coral); font-size: 21px; }
 .journey-stop b { color: var(--coral-dark); font-size: 16px; }
@@ -171,7 +168,6 @@ img { display: block; max-width: 100%; }
   .hero-shade { background: linear-gradient(180deg, rgba(25,36,91,.2), rgba(25,36,91,.88) 62%); }
   .cloud-one { top: 12%; right: 18%; width: 44px; height: 44px; }
   .cloud-two { display: none; }
-  .ocean-motion { height: 74px; opacity: .2; }
   .hero-copy { width: 100%; padding: 245px 22px 55px; }
   .hero h1 { font-size: 42px; }
   .coordinate-chip { display: none; }
@@ -182,7 +178,7 @@ img { display: block; max-width: 100%; }
   .project-image { aspect-ratio: 4/3; border-right: 0; border-bottom: 3px solid var(--navy); }
   .skill-grid { grid-template-columns: repeat(2, 1fr); }
   .journey-line { grid-template-columns: repeat(2, 1fr); gap: 24px 8px; }
-  .journey-route { display: none; }
+  .journey-route, .journey-boat { display: none; }
   .contact { grid-template-columns: 1fr; padding: 34px 22px 18px; }
   .contact-actions { justify-items: start; }
   .footer-row { flex-direction: column; }
