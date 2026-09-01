@@ -40,7 +40,7 @@ function Navigation({ reduceMotion }: { reduceMotion: boolean }) {
 
   return (
     <header className="topbar">
-      <a className="brand" href="#home" aria-label="Mara Tide home" onClick={(event) => handleSectionClick(event, '#home')}><span className="brand-mark">⚓</span><span>MARA.TIDE</span></a>
+      <a className="brand" href="#home" aria-label="SYH.tide home" onClick={(event) => handleSectionClick(event, '#home')}><span className="brand-mark">⚓</span><span>SYH.tide</span></a>
       <nav aria-label="Main navigation">
         {navigation.map((item) => <a key={item.label} href={item.href} onClick={(event) => handleSectionClick(event, item.href)}><span aria-hidden="true">{item.icon}</span>{item.label}</a>)}
       </nav>
@@ -87,9 +87,9 @@ function Hero({ reduceMotion }: { reduceMotion: boolean }) {
 function CaptainStatus() {
   return (
     <article className="pixel-panel status-panel">
-      <SectionTitle eyebrow="PLAYER PROFILE" title="Captain Status" />
+      <SectionTitle eyebrow="PROFILE" title="Captain Status" />
       <div className="status-grid">
-        <div className="avatar-card"><img src="/images/captain-hero.png" alt="Mara, the mint-haired captain" /><span>LV. 08</span></div>
+        <div className="avatar-card"><img src="/images/captain-hero.png" alt="SYH, the mint-haired captain" /><span>LV. 08</span></div>
         <div className="stats">
           {captainStats.map((stat) => (
             <div className="stat" key={stat.label}>
@@ -108,9 +108,9 @@ function About() {
   return (
     <article className="pixel-panel about-panel" id="about">
       <SectionTitle eyebrow="CAPTAIN'S LOG" title="About Me" />
-      <p className="big-copy">Hi, I’m <strong>Mara</strong> — a multidisciplinary designer and front-end tinkerer with a soft spot for thoughtful details.</p>
-      <p>I turn complex ideas into clear, friendly experiences. My favorite projects sit where visual systems, storytelling, and useful technology meet.</p>
-      <div className="mini-notes"><span>☼ BASED BY THE SEA</span><span>♡ HUMAN-CENTERED</span><span>✦ FOREVER CURIOUS</span></div>
+      <p className="big-copy">Hi, I’m <strong>Yunhan Shang</strong> — a multidisciplinary designer inspired by everyday life, human experiences, and the possibilities hidden in ordinary things.</p>
+      <p>I enjoy turning observations into thoughtful design explorations across experiences, systems, and emerging technologies.</p>
+      <p>I also love traveling and discovering new cultures and perspectives — for me, design is much like a journey: a way to stay curious, explore the unknown, and imagine new possibilities.</p>
     </article>
   );
 }
@@ -134,7 +134,27 @@ function Projects({ reduceMotion }: { reduceMotion: boolean }) {
 }
 
 function Skills() {
-  return <section className="pixel-panel skills-panel" id="skills"><SectionTitle eyebrow="SHIP'S INVENTORY" title="Skills & Tools" /><div className="skill-grid">{skills.map((skill) => <div className="skill-item" key={skill.name}><span>{skill.icon}</span><b>{skill.name}</b></div>)}</div></section>;
+  return (
+    <section className="pixel-panel skills-panel" id="skills">
+      <SectionTitle
+        eyebrow="SHIP'S INVENTORY"
+        title="Skills & Tools"
+      />
+
+      <div className="skill-grid">
+        {skills.map((skill) => (
+          <div className="skill-item" key={skill.name}>
+            <img
+              className="skill-icon"
+              src={skill.icon}
+              alt={skill.name}
+            />
+            <b>{skill.name}</b>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function Journey({ reduceMotion }: { reduceMotion: boolean }) {
@@ -164,7 +184,11 @@ function Journey({ reduceMotion }: { reduceMotion: boolean }) {
           }}
           transition={{ duration: 9.5, times: routeTimes, repeat: Infinity, ease: 'linear' }}
         />
-        {journey.map((stop) => <div className="journey-stop" key={stop.year}><span className="journey-icon">{stop.icon}</span><b>{stop.year}</b><strong>{stop.title}</strong><small>{stop.note}</small></div>)}
+        {journey.map((stop) => <div className="journey-stop" key={stop.year}><img
+  className="journey-icon"
+  src={stop.icon}
+  alt=""
+/><b>{stop.year}</b><strong>{stop.title}</strong><small>{stop.note}</small></div>)}
       </div>
     </section>
   );
@@ -174,8 +198,8 @@ function Contact({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <section className="contact" id="contact">
       <div><span className="section-eyebrow light">OPEN CHANNEL</span><h2>Ready for a new adventure?</h2><p>I’m always happy to hear about thoughtful products, curious collaborations, or a particularly good ocean fact.</p></div>
-      <div className="contact-actions"><PixelButton href="mailto:hello@example.com" reduceMotion={reduceMotion}>Send a message</PixelButton><a href="#home">Back to top ↑</a></div>
-      <div className="footer-row"><span>© 2026 MARA TIDE</span><span>MADE WITH ♡ + REACT</span><span>CALM SEAS · FULL HEART</span></div>
+      <div className="contact-actions"><PixelButton href="shangyunhan89@gmail.com" reduceMotion={reduceMotion}>Send a message</PixelButton><a href="#home">Back to top ↑</a></div>
+      <div className="footer-row"><span>© 2026 SYH.tide</span><span>MADE WITH ♡ + REACT</span><span>CALM SEAS · FULL HEART</span></div>
     </section>
   );
 }
