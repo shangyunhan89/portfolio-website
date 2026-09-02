@@ -131,8 +131,7 @@ img { display: block; max-width: 100%; }
 .journey-panel { background: #e8f5f2; }
 .journey-line { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding-top: 8px; }
 .journey-route { position: absolute; z-index: 0; top: 8px; left: 0; width: 100%; height: 48px; overflow: visible; }
-.journey-route path { fill: none; stroke: var(--navy); stroke-width: 2.25; stroke-linecap: round; vector-effect: non-scaling-stroke; opacity: .62; }
-.journey-boat-image { image-rendering: pixelated; pointer-events: none; filter: drop-shadow(2px 3px 0 #8797bd); }
+.journey-route path { fill: none; stroke: var(--navy); stroke-width: 2.25; stroke-dasharray: 7 7; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; opacity: .62; }
 .journey-stop { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .journey-icon { position: relative; z-index: 2; display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 10px; color: var(--navy); background: var(--cream); border: 3px solid var(--navy); box-shadow: 3px 3px 0 var(--coral); font-size: 21px; }
 .journey-stop b { color: var(--coral-dark); font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.1; }
