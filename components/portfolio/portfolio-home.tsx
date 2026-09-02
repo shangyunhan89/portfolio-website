@@ -5,14 +5,12 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Cloud } from 'lucide-react';
 import {
   captainStats,
+  driftMartProjectLog,
   journey,
   navigation,
-  projectLogs,
   projects,
   skills,
   type Project,
-  type ProjectLog,
-  type ProjectLogImage,
 } from '@/lib/portfolio-data';
 
 function PixelButton({ href, children, variant = 'primary', reduceMotion = false, target, rel }: { href: string; children: React.ReactNode; variant?: 'primary' | 'light'; reduceMotion?: boolean; target?: '_blank' | '_self' | '_parent' | '_top'; rel?: string }) {
@@ -112,16 +110,16 @@ function About() {
   return (
     <article className="pixel-panel about-panel" id="about">
       <SectionTitle eyebrow="CAPTAIN'S LOG" title="About Me" />
-      <div className="about-body">
-        <p>Hi, I’m <strong>Yunhan Shang</strong> — a multidisciplinary designer inspired by everyday life and the possibilities hidden in ordinary things.</p>
-        <p>I turn observations into thoughtful experiences across products, services, and emerging technologies.</p>
-        <p>Travel keeps me curious. Exploring new places, cultures, and perspectives constantly shapes how I see design — as a journey into the unknown and a way to imagine new possibilities.</p>
-      </div>
+      <p className="big-copy">Hi, I’m <strong>Yunhan Shang</strong> —— a multidisciplinary designer inspired by everyday life and the possibilities hidden in ordinary things.</p>
+      <p>I enjoy turning observations into thoughtful design explorations.</p>
+      <p>I love traveling and discovering new perspectives —— for me, design is a journey of curiosity and exploration.</p>
     </article>
   );
 }
 
-function ProjectCard({ project, reduceMotion, onExplore, buttonRef }: { project: Project; reduceMotion: boolean; onExplore: () => void; buttonRef?: React.Ref<HTMLButtonElement> }) {
+function ProjectCard({ project, reduceMotion, onExplore, buttonRef }: { project: Project; reduceMotion: boolean; onExplore?: () => void; buttonRef?: React.RefObject<HTMLButtonElement | null> }) {
+  const isDriftMart = project.number === '01';
+
   return (
     <motion.article className={`project-card ${project.accent}`} initial="rest" whileHover={reduceMotion ? 'rest' : 'hover'} animate="rest" variants={{ rest: { y: 0 }, hover: { y: -5 } }} transition={{ duration: 0.22, ease: 'easeOut' }}>
       <motion.div className="project-number" variants={{ rest: { x: 0 }, hover: { x: 3 } }} transition={{ duration: 0.22 }}>{project.number}</motion.div>
@@ -129,17 +127,18 @@ function ProjectCard({ project, reduceMotion, onExplore, buttonRef }: { project:
       <div className="project-body">
         <span>{project.category}</span><h3>{project.title}</h3><p>{project.description}</p>
         <div className="tag-list">{project.tags.map((tag) => <b key={tag}>{tag}</b>)}</div>
-        <button ref={buttonRef} type="button" onClick={onExplore} aria-label={`Explore ${project.title} project`}>
-          Explore project →
+        <button ref={buttonRef} type="button" onClick={onExplore} aria-label={isDriftMart ? 'Explore DriftMart project' : `View ${project.title} case study`}>
+          {isDriftMart ? 'Explore project →' : <>View case study <span>›</span></>}
         </button>
       </div>
     </motion.article>
   );
 }
 
+type ProjectLogImage = { path: string; label?: string; alt?: string };
+
 function ProjectImagePlaceholder({ image, className = '', reduceMotion }: { image: ProjectLogImage; className?: string; reduceMotion: boolean }) {
-  const [imageFailed, setImageFailed] = useState(false);
-  const hasImage = !imageFailed;
+  const hasImage = Boolean(image.alt);
 
   return (
     <motion.figure
@@ -150,22 +149,20 @@ function ProjectImagePlaceholder({ image, className = '', reduceMotion }: { imag
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       {hasImage ? (
-        <img className="project-log-rendered-image" src={image.path} alt={image.alt} onError={() => setImageFailed(true)} />
+        <img className="project-log-rendered-image" src={image.path} alt={image.alt} />
       ) : (
         <>
           <div aria-hidden="true"><span>▧</span><b>IMAGE SLOT</b></div>
-          <figcaption><strong>{image.label ?? image.alt}</strong><code>{image.path}</code></figcaption>
+          <figcaption><strong>{image.label}</strong><code>{image.path}</code></figcaption>
         </>
       )}
     </motion.figure>
   );
 }
 
-function ProjectLogModal({ open, onClose, triggerRef, reduceMotion, projectLog }: { open: boolean; onClose: () => void; triggerRef: React.RefObject<HTMLButtonElement | null>; reduceMotion: boolean; projectLog: ProjectLog }) {
+function DriftMartProjectLog({ open, onClose, triggerRef, reduceMotion }: { open: boolean; onClose: () => void; triggerRef: React.RefObject<HTMLButtonElement | null>; reduceMotion: boolean }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const titleId = `project-log-${projectLog.number}-title`;
-  const overviewId = `project-log-${projectLog.number}-overview`;
 
   useEffect(() => {
     if (!open) return;
@@ -223,8 +220,8 @@ function ProjectLogModal({ open, onClose, triggerRef, reduceMotion, projectLog }
             className="project-log-window"
             role="dialog"
             aria-modal="true"
-            aria-labelledby={titleId}
-            aria-describedby={overviewId}
+            aria-labelledby="driftmart-log-title"
+            aria-describedby="driftmart-log-overview"
             initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.94 }}
             animate={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: [0.94, 1.02, 1] }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
@@ -232,35 +229,57 @@ function ProjectLogModal({ open, onClose, triggerRef, reduceMotion, projectLog }
           >
             <header className="project-log-header">
               <div className="project-log-heading">
-                <span className="project-log-kicker">PROJECT LOG {projectLog.number}</span>
-                <h2 id={titleId}>{projectLog.title}</h2>
-                <p>{projectLog.subtitle}</p>
-                <div className="project-log-tags">{projectLog.tags.map((tag) => <b key={tag}>{tag}</b>)}</div>
+                <span className="project-log-kicker">PROJECT LOG {driftMartProjectLog.number}</span>
+                <h2 id="driftmart-log-title">{driftMartProjectLog.title}</h2>
+                <p>{driftMartProjectLog.subtitle}</p>
+                <div className="project-log-tags">{driftMartProjectLog.tags.map((tag) => <b key={tag}>{tag}</b>)}</div>
               </div>
-              <button ref={closeButtonRef} className="project-log-close" type="button" onClick={onClose} aria-label={`Close ${projectLog.title} project log`}>[ × ]</button>
+              <button ref={closeButtonRef} className="project-log-close" type="button" onClick={onClose} aria-label="Close DriftMart project log">[ × ]</button>
             </header>
 
             <div className="project-log-scroll">
               <section className="project-log-section project-log-hero-block">
                 <span className="project-log-index">01 — SCENE</span>
-                <ProjectImagePlaceholder key={projectLog.scene.path} image={projectLog.scene} className="project-log-hero-image" reduceMotion={reduceMotion} />
+                <ProjectImagePlaceholder image={{path: '/images/driftmart/scene.png', alt: 'DriftMart VR supermarket scene'}} className="project-log-hero-image" reduceMotion={reduceMotion} />
               </section>
 
               <section className="project-log-section project-log-overview">
                 <span className="project-log-index">02 — OVERVIEW</span>
-                <p id={overviewId} className="project-log-description">{projectLog.overview}</p>
+                <p id="driftmart-log-overview">
+                  Three modes support discovery, relaxation, and playful learning through authentic products, adaptive NPCs, and validated local stories.</p>
               </section>
 
-              {projectLog.sections.map((section) => (
-                <section className="project-log-section" key={section.number}>
-                  <div className="project-log-section-heading"><span className="project-log-index">{section.number} — {section.title}</span><p className="project-log-description">{section.description}</p></div>
-                  <ProjectImagePlaceholder key={section.image.path} image={section.image} className="project-log-mode-image" reduceMotion={reduceMotion} />
-                </section>
-              ))}
+
+              <section className="project-log-section">
+                <div className="project-log-section-heading"><span className="project-log-index">03 — TASK MODE</span><p>Research, context, and early ways of mapping the experience.</p></div>
+                <div className="project-log-grid discover-grid">
+                  {driftMartProjectLog.images.discover.map((image, index) => <ProjectImagePlaceholder key={image.path} className={`discover-${index + 1}`} reduceMotion={reduceMotion} />)}
+                </div>
+              </section>
+
+              <section className="project-log-section">
+                <div className="project-log-section-heading"><span className="project-log-index">04 — CALM MODE</span><p>Environment, modelling, and interaction details.</p></div>
+                <div className="project-log-grid design-grid">
+                  {driftMartProjectLog.images.design.map((image, index) => <ProjectImagePlaceholder key={image.path} image={image} className={`design-${index + 1}`} reduceMotion={reduceMotion} />)}
+                </div>
+              </section>
+
+              <section className="project-log-section">
+                <div className="project-log-section-heading"><span className="project-log-index">05 — KIDS MODE</span><p>VR scenes, interactions, and character encounters.</p></div>
+                <div className="project-log-grid experience-grid">
+                  {driftMartProjectLog.images.experience.map((image, index) => <ProjectImagePlaceholder key={image.path} image={image} className={`experience-${index + 1}`} reduceMotion={reduceMotion} />)}
+                </div>
+              </section>
+
+              <section className="project-log-section project-log-outcome">
+                <span className="project-log-index">06 — OUTCOME</span>
+                <p>{driftMartProjectLog.outcome}</p>
+                <ProjectImagePlaceholder image={driftMartProjectLog.images.outcome} className="project-log-final-image" reduceMotion={reduceMotion} />
+              </section>
 
               <footer className="project-log-footer">
                 <button className="project-log-back" type="button" onClick={onClose}>← Back to projects</button>
-                <span>END OF LOG · {projectLog.number}</span>
+                <span>END OF LOG · 01</span>
               </footer>
             </div>
           </motion.div>
@@ -271,16 +290,10 @@ function ProjectLogModal({ open, onClose, triggerRef, reduceMotion, projectLog }
 }
 
 function Projects({ reduceMotion }: { reduceMotion: boolean }) {
-  const [selectedProjectNumber, setSelectedProjectNumber] = useState('01');
-  const [isProjectLogOpen, setIsProjectLogOpen] = useState(false);
-  const projectButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const activeTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const openProjectLog = useCallback((projectNumber: string) => {
-    activeTriggerRef.current = projectButtonRefs.current[projectNumber] ?? null;
-    setSelectedProjectNumber(projectNumber);
-    setIsProjectLogOpen(true);
-  }, []);
-  const closeProjectLog = useCallback(() => setIsProjectLogOpen(false), []);
+  const [isDriftMartOpen, setIsDriftMartOpen] = useState(false);
+  const driftMartButtonRef = useRef<HTMLButtonElement>(null);
+  const openDriftMart = useCallback(() => setIsDriftMartOpen(true), []);
+  const closeDriftMart = useCallback(() => setIsDriftMartOpen(false), []);
 
   return (
     <>
@@ -292,19 +305,13 @@ function Projects({ reduceMotion }: { reduceMotion: boolean }) {
               key={project.number}
               project={project}
               reduceMotion={reduceMotion}
-              onExplore={() => openProjectLog(project.number)}
-              buttonRef={(node) => { projectButtonRefs.current[project.number] = node; }}
+              onExplore={project.number === '01' ? openDriftMart : undefined}
+              buttonRef={project.number === '01' ? driftMartButtonRef : undefined}
             />
           ))}
         </div>
       </section>
-      <ProjectLogModal
-        open={isProjectLogOpen}
-        onClose={closeProjectLog}
-        triggerRef={activeTriggerRef}
-        reduceMotion={reduceMotion}
-        projectLog={projectLogs[selectedProjectNumber]}
-      />
+      <DriftMartProjectLog open={isDriftMartOpen} onClose={closeDriftMart} triggerRef={driftMartButtonRef} reduceMotion={reduceMotion} />
     </>
   );
 }

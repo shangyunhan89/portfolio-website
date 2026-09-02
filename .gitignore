@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+/.npm-cache/
 /.pnp
 .pnp.*
 .yarn/*
@@ -33,6 +34,7 @@ yarn-error.log*
 .vercel
 next-env.d.ts
 /dist/
+/dist-pages/
 /.wrangler/
 /outputs/
 /work/
