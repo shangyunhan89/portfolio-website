@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { useCallback, useEffect, useRef } from 'react';
+import { animate, motion, useMotionValue, useMotionValueEvent, useReducedMotion } from 'framer-motion';
 import { Cloud } from 'lucide-react';
 import {
   captainStats,
@@ -157,8 +158,98 @@ function Skills() {
   );
 }
 
+function makeJourneyDasharray(visibleLength: number, totalLength: number) {
+  const hiddenLength = Math.max(totalLength * 2, 1);
+  if (visibleLength <= 0) return `0 ${hiddenLength}`;
+
+  const dash = 7;
+  const gap = 7;
+  const endpointDash = 2.5;
+  const segments: number[] = [];
+  let consumed = 0;
+
+  while (consumed + dash + gap + endpointDash < visibleLength) {
+    segments.push(dash, gap);
+    consumed += dash + gap;
+  }
+
+  const remaining = visibleLength - consumed;
+  if (remaining <= dash) {
+    segments.push(remaining, hiddenLength);
+  } else {
+    const finalDash = Math.min(endpointDash, remaining - dash);
+    segments.push(dash, Math.max(0, remaining - dash - finalDash), finalDash, hiddenLength);
+  }
+
+  return segments.map((segment) => segment.toFixed(3)).join(' ');
+}
+
 function Journey({ reduceMotion }: { reduceMotion: boolean }) {
-  const routeTimes = [0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.82, 0.92, 1];
+  const routePathRef = useRef<SVGPathElement>(null);
+  const progress = useMotionValue(reduceMotion ? 1 : 0);
+  const routeDasharray = useMotionValue('0 1000');
+  const boatX = useMotionValue(-1);
+  const boatY = useMotionValue(1);
+  const boatOpacity = useMotionValue(1);
+
+  const updateJourneyFromProgress = useCallback((latestProgress: number) => {
+    const routePath = routePathRef.current;
+    if (!routePath) return;
+
+    const totalLength = routePath.getTotalLength();
+    const clampedProgress = Math.max(0, Math.min(1, latestProgress));
+    const visibleLength = totalLength * clampedProgress;
+    const point = routePath.getPointAtLength(visibleLength);
+
+    routeDasharray.set(makeJourneyDasharray(visibleLength, totalLength));
+    boatX.set(point.x - 7);
+    boatY.set(point.y - 19);
+  }, [boatX, boatY, routeDasharray]);
+
+  useMotionValueEvent(progress, 'change', updateJourneyFromProgress);
+
+  useEffect(() => {
+    let cancelled = false;
+    let sailAnimation: ReturnType<typeof animate> | undefined;
+    let fadeAnimation: ReturnType<typeof animate> | undefined;
+    const wait = (milliseconds: number) => new Promise<void>((resolve) => setTimeout(resolve, milliseconds));
+
+    const runJourney = async () => {
+      if (reduceMotion) {
+        progress.set(1);
+        boatOpacity.set(1);
+        updateJourneyFromProgress(1);
+        return;
+      }
+
+      while (!cancelled) {
+        progress.set(0);
+        boatOpacity.set(1);
+        updateJourneyFromProgress(0);
+
+        sailAnimation = animate(progress, 1, { duration: 10, ease: 'linear' });
+        await sailAnimation;
+        if (cancelled) return;
+
+        await wait(650);
+        if (cancelled) return;
+
+        fadeAnimation = animate(boatOpacity, 0.45, { duration: 0.35, ease: 'easeOut' });
+        await fadeAnimation;
+        if (cancelled) return;
+
+        await wait(250);
+      }
+    };
+
+    void runJourney();
+
+    return () => {
+      cancelled = true;
+      sailAnimation?.stop();
+      fadeAnimation?.stop();
+    };
+  }, [boatOpacity, progress, reduceMotion, updateJourneyFromProgress]);
 
   return (
     <section className="pixel-panel journey-panel" id="journey">
@@ -166,24 +257,28 @@ function Journey({ reduceMotion }: { reduceMotion: boolean }) {
       <div className="journey-line">
         <svg className="journey-route" viewBox="0 0 100 22" preserveAspectRatio="none" aria-hidden="true">
           <motion.path
-            d="M6 11 C18 2 28 20 40 11 S63 2 76 11 S88 18 95 11"
-            initial={reduceMotion ? { pathLength: 1 } : { pathLength: 0 }}
-            animate={reduceMotion ? { pathLength: 1 } : { pathLength: [0, 0.18, 0.38, 0.58, 0.78, 0.9, 1, 1, 0] }}
-            transition={{ duration: 9.5, times: routeTimes, repeat: Infinity, ease: 'linear' }}
+            id="journey-route"
+            ref={routePathRef}
+            d="M3 12 C10 4 19 5 26 12 S42 19 49 12 S65 4 72 12 S88 19 97 11"
+            style={{ strokeDasharray: routeDasharray }}
           />
+          <motion.g style={{ opacity: boatOpacity }}>
+            <motion.g
+              animate={reduceMotion ? undefined : { y: [-2, 2, -2] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <motion.image
+                className="journey-boat-image"
+                href="/images/journey-boat.png"
+                x={boatX}
+                y={boatY}
+                width="14"
+                height="14"
+                preserveAspectRatio="xMidYMid meet"
+              />
+            </motion.g>
+          </motion.g>
         </svg>
-        <motion.img
-          className="journey-boat"
-          src="/images/journey-boat.png"
-          alt=""
-          initial={reduceMotion ? { left: '6%', top: 6, opacity: 1 } : { left: '6%', top: 6, opacity: 0 }}
-          animate={reduceMotion ? { left: '6%', top: 6, opacity: 1 } : {
-            left: ['6%', '23%', '40%', '58%', '76%', '86%', '95%', '95%', '6%'],
-            top: [6, -4, 6, -4, 6, 14, 6, 6, 6],
-            opacity: [0, 1, 1, 1, 1, 1, 1, 0, 0],
-          }}
-          transition={{ duration: 9.5, times: routeTimes, repeat: Infinity, ease: 'linear' }}
-        />
         {journey.map((stop) => <div className="journey-stop" key={stop.year}><img
   className="journey-icon"
   src={stop.icon}
