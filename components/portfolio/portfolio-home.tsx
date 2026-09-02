@@ -135,19 +135,27 @@ function ProjectCard({ project, reduceMotion, onExplore, buttonRef }: { project:
   );
 }
 
-type ProjectLogImage = { path: string; label: string };
+type ProjectLogImage = { path: string; label?: string; alt?: string };
 
 function ProjectImagePlaceholder({ image, className = '', reduceMotion }: { image: ProjectLogImage; className?: string; reduceMotion: boolean }) {
+  const hasImage = Boolean(image.alt);
+
   return (
     <motion.figure
-      className={`project-log-placeholder ${className}`}
+      className={`project-log-placeholder ${hasImage ? 'has-image' : ''} ${className}`}
       initial={reduceMotion ? false : { opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
-      <div aria-hidden="true"><span>▧</span><b>IMAGE SLOT</b></div>
-      <figcaption><strong>{image.label}</strong><code>{image.path}</code></figcaption>
+      {hasImage ? (
+        <img className="project-log-rendered-image" src={image.path} alt={image.alt} />
+      ) : (
+        <>
+          <div aria-hidden="true"><span>▧</span><b>IMAGE SLOT</b></div>
+          <figcaption><strong>{image.label}</strong><code>{image.path}</code></figcaption>
+        </>
+      )}
     </motion.figure>
   );
 }
@@ -231,8 +239,8 @@ function DriftMartProjectLog({ open, onClose, triggerRef, reduceMotion }: { open
 
             <div className="project-log-scroll">
               <section className="project-log-section project-log-hero-block">
-                <span className="project-log-index">01 — HERO</span>
-                <ProjectImagePlaceholder image={driftMartProjectLog.images.hero} className="project-log-hero-image" reduceMotion={reduceMotion} />
+                <span className="project-log-index">01 — SCENE</span>
+                <ProjectImagePlaceholder image={{path: '/images/driftmart/scene.png', alt: 'DriftMart VR supermarket scene'}} className="project-log-hero-image" reduceMotion={reduceMotion} />
               </section>
 
               <section className="project-log-section project-log-overview">
