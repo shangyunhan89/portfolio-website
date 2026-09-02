@@ -115,7 +115,7 @@ export const projectLogs: Record<string, ProjectLog> = {
     title: 'Willow Loop',
     subtitle: 'Community Service · Sustainable Design',
     tags: ['RHINO', 'SERVICE DESIGN', 'MATERIALS'],
-    overview: 'Willow Loop explores how airborne willow catkins can be collected within community spaces and transformed from seasonal waste into a reusable material. The project combines environmental observation, material research, and service design to create a circular system for collection and reuse.',
+    overview: 'To enable the collection and reuse of willow catkins, the project introduces a two-stage capture system: a primary collection structure in public spaces and a secondary capture module integrated into residential facades.',
     scene: {
       path: '/images/willowloop/tree.png',
       alt: 'Willow Loop project scene',
@@ -124,14 +124,14 @@ export const projectLogs: Record<string, ProjectLog> = {
     sections: [
       {
         number: '03',
-        title: 'RESEARCH',
-        description: 'Understanding the seasonal spread of willow catkins, community pain points, and opportunities for collection.',
+        title: 'Residential Facade Module',
+        description: 'Capture catkins close to homes\nwithout disrupting daily life.',
         image: { path: '/images/willowloop/tree1.png', alt: 'Willow Loop research', label: 'Willow Loop research' },
       },
       {
         number: '04',
-        title: 'DESIGN',
-        description: 'Developing a modular collection structure and exploring material, airflow, and installation strategies.',
+        title: 'Public Capture Structure',
+        description: 'Capture large amounts of drifting catkins\nin open spaces.',
         image: { path: '/images/willowloop/tree2.png', alt: 'Willow Loop design', label: 'Willow Loop design' },
       },
     ],
@@ -143,28 +143,22 @@ export const projectLogs: Record<string, ProjectLog> = {
     tags: ['STABLE DIFFUSION', 'LoRA', 'CONTROLNET'],
     overview: 'AI Fabric Lab is an interactive generative design platform that explores how AI can support textile ideation. Users can generate and adjust textile patterns through text and image inputs while controlling visual parameters in real time.',
     scene: {
-      path: '/images/ai-fabric/scene.png',
+      path: '/images/aifabriclab/fig.png',
       alt: 'AI Fabric Lab project scene',
       label: 'AI Fabric Lab scene',
     },
     sections: [
       {
         number: '03',
-        title: 'RESEARCH',
-        description: 'Exploring generative AI workflows, textile pattern structures, and the limitations of existing image-generation tools.',
-        image: { path: '/images/ai-fabric/screen1.png', alt: 'AI Fabric Lab research', label: 'AI Fabric Lab research' },
+        title: 'Pipeline',
+        description: 'Converting text-based fabric parameters into generated textile visuals through encoding, denoising, and image decoding.',
+        image: { path: '/images/aifabriclab/fig1.png', alt: 'AI Fabric Lab generation pipeline', label: 'AI Fabric Lab generation pipeline' },
       },
       {
         number: '04',
-        title: 'GENERATION',
-        description: 'Building a workflow using Stable Diffusion, LoRA, and ControlNet to generate more controllable textile patterns.',
-        image: { path: '/images/ai-fabric/screen2.png', alt: 'AI Fabric Lab generation', label: 'AI Fabric Lab generation' },
-      },
-      {
-        number: '05',
-        title: 'INTERACTION',
-        description: 'Transforming technical generation parameters into a clearer interactive interface for designers.',
-        image: { path: '/images/ai-fabric/screen3.png', alt: 'AI Fabric Lab interaction', label: 'AI Fabric Lab interaction' },
+        title: 'Generation results',
+        description: 'Generating multiple weave structures while preserving color and structural details.',
+        image: { path: '/images/aifabriclab/fig2.png', alt: 'AI Fabric Lab generation results', label: 'AI Fabric Lab generation results' },
       },
     ],
   },
