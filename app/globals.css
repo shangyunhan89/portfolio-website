@@ -156,6 +156,7 @@ img { display: block; max-width: 100%; }
 .project-log-placeholder figcaption code { color: #6d7097; font-family: var(--font-body); font-size: 11px; font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
 .project-log-hero-block { padding-top: 24px; background: #fffdf4; }
 .project-log-hero-image { min-height: 0; margin-top: 12px; background: #c8e4ed; }
+.project-log-mode-image { width: 100%; min-height: 0; }
 .project-log-overview { display: grid; grid-template-columns: minmax(150px, .42fr) minmax(0, 1.58fr); gap: clamp(24px, 5vw, 70px); align-items: start; background: #f8dfe4; }
 .project-log-overview p, .project-log-outcome > p { max-width: 780px; margin: 0; font-size: clamp(16px, 1.7vw, 18px); font-weight: 600; line-height: 1.65; }
 .project-log-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; }

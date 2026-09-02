@@ -8,6 +8,29 @@ export type Project = {
   accent: string;
 };
 
+export type ProjectLogImage = {
+  path: string;
+  alt: string;
+  label?: string;
+};
+
+export type ProjectLogSection = {
+  number: string;
+  title: string;
+  description: string;
+  image: ProjectLogImage;
+};
+
+export type ProjectLog = {
+  number: string;
+  title: string;
+  subtitle: string;
+  tags: string[];
+  overview: string;
+  scene: ProjectLogImage;
+  sections: ProjectLogSection[];
+};
+
 export const navigation = [
   { label: 'Home', href: '#home', icon: '⌂' },
   { label: 'About', href: '#about', icon: '◉' },
@@ -54,33 +77,106 @@ export const projects: Project[] = [
   },
 ];
 
-export const driftMartProjectLog = {
-  number: '01',
-  title: 'DriftMart',
-  subtitle: '3D Modelling · VR Interaction · UI/UX Design',
-  tags: ['UNITY', 'BLENDER', 'UI/UX', 'VR'],
-  overview: 'DriftMart is an immersive VR supermarket experience that combines cultural exploration with a calm, low-pressure shopping environment. Users can discover everyday products, local habits, and stories from different places while browsing at their own pace.',
-  images: {
-    hero: { path: '/images/driftmart/hero.png', label: 'Project hero image' },
-    discover: [
-      { path: '/images/driftmart/discover-01.png', label: 'Research and context' },
-      { path: '/images/driftmart/discover-02.png', label: 'Early discovery map' },
-      { path: '/images/driftmart/discover-03.png', label: 'Concept exploration' },
+export const projectLogs: Record<string, ProjectLog> = {
+  '01': {
+    number: '01',
+    title: 'DriftMart',
+    subtitle: '3D Modelling · VR Interaction · UI/UX Design',
+    tags: ['UNITY', 'BLENDER', 'UI/UX', 'VR'],
+    overview: 'Three modes support discovery, relaxation, and playful learning through authentic products, adaptive NPCs, and validated local stories.',
+    scene: {
+      path: '/images/driftmart/scene.png',
+      alt: 'DriftMart VR supermarket scene',
+      label: 'DriftMart scene',
+    },
+    sections: [
+      {
+        number: '03',
+        title: 'TASK MODE',
+        description: 'Complete guided shopping tasks while discovering authentic products and local stories.',
+        image: { path: '/images/driftmart/screen1.png', alt: 'DriftMart Task Mode' },
+      },
+      {
+        number: '04',
+        title: 'CALM MODE',
+        description: 'Browse at your own pace in a low-pressure environment designed for gentle exploration.',
+        image: { path: '/images/driftmart/screen2.png', alt: 'DriftMart Calm Mode' },
+      },
+      {
+        number: '05',
+        title: 'KIDS MODE',
+        description: 'Learn through playful prompts, friendly characters, and approachable interactions.',
+        image: { path: '/images/driftmart/screen3.png', alt: 'DriftMart Kids Mode' },
+      },
     ],
-    design: [
-      { path: '/images/driftmart/design-01.png', label: 'Environment design' },
-      { path: '/images/driftmart/design-02.png', label: 'Supermarket modelling' },
-      { path: '/images/driftmart/design-03.png', label: 'UI and interaction visuals' },
-    ],
-    experience: [
-      { path: '/images/driftmart/experience-01.png', label: 'VR scene' },
-      { path: '/images/driftmart/experience-02.png', label: 'Interaction screenshot' },
-      { path: '/images/driftmart/experience-03.png', label: 'Character and NPC interaction' },
-    ],
-    outcome: { path: '/images/driftmart/outcome.png', label: 'Final project image' },
   },
-  outcome: 'DriftMart brings cultural discovery and calm interaction into a playful VR environment designed for unhurried exploration.',
+  '02': {
+    number: '02',
+    title: 'Willow Loop',
+    subtitle: 'Community Service · Sustainable Design',
+    tags: ['RHINO', 'SERVICE DESIGN', 'MATERIALS'],
+    overview: 'Willow Loop explores how airborne willow catkins can be collected within community spaces and transformed from seasonal waste into a reusable material. The project combines environmental observation, material research, and service design to create a circular system for collection and reuse.',
+    scene: {
+      path: '/images/willow-loop/scene.png',
+      alt: 'Willow Loop project scene',
+      label: 'Willow Loop scene',
+    },
+    sections: [
+      {
+        number: '03',
+        title: 'RESEARCH',
+        description: 'Understanding the seasonal spread of willow catkins, community pain points, and opportunities for collection.',
+        image: { path: '/images/willow-loop/screen1.png', alt: 'Willow Loop research', label: 'Willow Loop research' },
+      },
+      {
+        number: '04',
+        title: 'DESIGN',
+        description: 'Developing a modular collection structure and exploring material, airflow, and installation strategies.',
+        image: { path: '/images/willow-loop/screen2.png', alt: 'Willow Loop design', label: 'Willow Loop design' },
+      },
+      {
+        number: '05',
+        title: 'APPLICATION',
+        description: 'Applying the system across public spaces and residential environments, while reusing collected willow fluff as an oil-absorbing material.',
+        image: { path: '/images/willow-loop/screen3.png', alt: 'Willow Loop application', label: 'Willow Loop application' },
+      },
+    ],
+  },
+  '03': {
+    number: '03',
+    title: 'AI Fabric Lab',
+    subtitle: 'AI Textile · Generative Interaction',
+    tags: ['STABLE DIFFUSION', 'LoRA', 'CONTROLNET'],
+    overview: 'AI Fabric Lab is an interactive generative design platform that explores how AI can support textile ideation. Users can generate and adjust textile patterns through text and image inputs while controlling visual parameters in real time.',
+    scene: {
+      path: '/images/ai-fabric/scene.png',
+      alt: 'AI Fabric Lab project scene',
+      label: 'AI Fabric Lab scene',
+    },
+    sections: [
+      {
+        number: '03',
+        title: 'RESEARCH',
+        description: 'Exploring generative AI workflows, textile pattern structures, and the limitations of existing image-generation tools.',
+        image: { path: '/images/ai-fabric/screen1.png', alt: 'AI Fabric Lab research', label: 'AI Fabric Lab research' },
+      },
+      {
+        number: '04',
+        title: 'GENERATION',
+        description: 'Building a workflow using Stable Diffusion, LoRA, and ControlNet to generate more controllable textile patterns.',
+        image: { path: '/images/ai-fabric/screen2.png', alt: 'AI Fabric Lab generation', label: 'AI Fabric Lab generation' },
+      },
+      {
+        number: '05',
+        title: 'INTERACTION',
+        description: 'Transforming technical generation parameters into a clearer interactive interface for designers.',
+        image: { path: '/images/ai-fabric/screen3.png', alt: 'AI Fabric Lab interaction', label: 'AI Fabric Lab interaction' },
+      },
+    ],
+  },
 };
+
+export const driftMartProjectLog = projectLogs['01'];
 
 export const skills = [
   { name: 'UNITY', icon: '/icons/unity.png' },
