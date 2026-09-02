@@ -114,8 +114,8 @@ function About() {
       <SectionTitle eyebrow="CAPTAIN'S LOG" title="About Me" />
       <div className="about-body">
         <p>Hi, I’m <strong>Yunhan Shang</strong> — a multidisciplinary designer inspired by everyday life and the possibilities hidden in ordinary things.</p>
-        <p>I turn observations into thoughtful experiences across products, services, and emerging technologies.</p>
-        <p>Travel keeps me curious. Exploring new places, cultures, and perspectives constantly shapes how I see design — as a journey into the unknown and a way to imagine new possibilities.</p>
+        <p>I turn observations into thoughtful design experiences.</p>
+        <p>I love traveling and discovering new perspectives — for me, design is a journey of curiosity and exploration.</p>
       </div>
     </article>
   );
