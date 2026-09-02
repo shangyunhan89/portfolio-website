@@ -112,9 +112,9 @@ function About() {
   return (
     <article className="pixel-panel about-panel" id="about">
       <SectionTitle eyebrow="CAPTAIN'S LOG" title="About Me" />
-      <p className="big-copy">Hi, I’m <strong>Yunhan Shang</strong> — a multidisciplinary designer inspired by everyday life, human experiences, and the possibilities hidden in ordinary things.</p>
-      <p>I enjoy turning observations into thoughtful design explorations across experiences, systems, and emerging technologies.</p>
-      <p>I also love traveling and discovering new cultures and perspectives — for me, design is much like a journey: a way to stay curious, explore the unknown, and imagine new possibilities.</p>
+      <p>Hi, I’m <strong>Yunhan Shang</strong> — a multidisciplinary designer inspired by everyday life and the possibilities hidden in ordinary things.</p>
+      <p>I turn observations into thoughtful experiences across products, services, and emerging technologies.</p>
+      <p>Travel keeps me curious. Exploring new places, cultures, and perspectives constantly shapes how I see design — as a journey into the unknown and a way to imagine new possibilities.</p>
     </article>
   );
 }
