@@ -15,9 +15,9 @@ import {
   type ProjectLogImage,
 } from '@/lib/portfolio-data';
 
-function PixelButton({ href, children, variant = 'primary', reduceMotion = false }: { href: string; children: React.ReactNode; variant?: 'primary' | 'light'; reduceMotion?: boolean }) {
+function PixelButton({ href, children, variant = 'primary', reduceMotion = false, target, rel }: { href: string; children: React.ReactNode; variant?: 'primary' | 'light'; reduceMotion?: boolean; target?: '_blank' | '_self' | '_parent' | '_top'; rel?: string }) {
   return (
-    <motion.a whileHover={reduceMotion ? undefined : { y: -2 }} whileTap={reduceMotion ? undefined : { y: 1 }} className={`pixel-button ${variant}`} href={href}>
+    <motion.a whileHover={reduceMotion ? undefined : { y: -2 }} whileTap={reduceMotion ? undefined : { y: 1 }} className={`pixel-button ${variant}`} href={href} target={target} rel={rel}>
       {children}<span aria-hidden="true">›</span>
     </motion.a>
   );
@@ -358,7 +358,7 @@ function Contact({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <section className="contact" id="contact">
       <div><span className="section-eyebrow light">OPEN CHANNEL</span><h2>Ready for a new adventure?</h2><p>I’m always happy to hear about thoughtful products, curious collaborations, or new adventures we might set sail on together.</p></div>
-      <div className="contact-actions"><PixelButton href="mailto:shangyunhan89@gmail.com" reduceMotion={reduceMotion}>Send a message</PixelButton><a href="#home">Back to top ↑</a></div>
+      <div className="contact-actions"><PixelButton href="https://mail.google.com/mail/?view=cm&fs=1&to=shangyunhan89@gmail.com&su=A%20New%20Adventure" target="_blank" rel="noopener noreferrer" reduceMotion={reduceMotion}>Send a message</PixelButton><a href="#home">Back to top ↑</a></div>
       <div className="footer-row"><span>© 2026 SYH.tide</span><span>MADE WITH ♡ + REACT</span><span>CALM SEAS · FULL HEART</span></div>
     </section>
   );
