@@ -246,12 +246,12 @@ function ProjectLogModal({ open, onClose, triggerRef, reduceMotion, projectLog }
 
               <section className="project-log-section project-log-overview">
                 <span className="project-log-index">02 — OVERVIEW</span>
-                <p id={overviewId}>{projectLog.overview}</p>
+                <p id={overviewId} className="project-log-description">{projectLog.overview}</p>
               </section>
 
               {projectLog.sections.map((section) => (
                 <section className="project-log-section" key={section.number}>
-                  <div className="project-log-section-heading"><span className="project-log-index">{section.number} — {section.title}</span><p>{section.description}</p></div>
+                  <div className="project-log-section-heading"><span className="project-log-index">{section.number} — {section.title}</span><p className="project-log-description">{section.description}</p></div>
                   <ProjectImagePlaceholder key={section.image.path} image={section.image} className="project-log-mode-image" reduceMotion={reduceMotion} />
                 </section>
               ))}
