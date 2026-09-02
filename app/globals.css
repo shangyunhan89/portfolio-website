@@ -102,7 +102,7 @@ img { display: block; max-width: 100%; }
 .xp-row i { display: block; width: 72%; height: 100%; background: var(--coral); }
 .about-panel { position: relative; overflow: hidden; }
 .about-panel::after { content: '✦'; position: absolute; right: 18px; bottom: 14px; color: var(--coral); font-size: 42px; opacity: .35; }
-.about-panel p { max-width: min(760px, 90%); margin: 0 0 14px; color: var(--navy); font-size: clamp(17px, 1.25vw, 18px); font-weight: 500; line-height: 1.6; letter-spacing: .01em; text-align: left; text-wrap: pretty; }
+.about-panel p { width: calc(100% - 46px); max-width: none; margin: 0 0 14px; color: var(--navy); font-size: clamp(17px, 1.25vw, 18px); font-weight: 500; line-height: 1.6; letter-spacing: .01em; text-align: left; text-wrap: pretty; }
 .about-panel p:last-child { margin-bottom: 0; }
 .about-panel p strong { font-weight: 700; }
 .mini-notes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 21px; }
