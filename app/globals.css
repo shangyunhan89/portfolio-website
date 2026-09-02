@@ -100,8 +100,9 @@ img { display: block; max-width: 100%; }
 .xp-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; margin-top: 17px; padding-top: 14px; border-top: 2px dashed #c9b6c8; font-size: 11px; font-weight: 700; line-height: 1.3; }
 .xp-row > div { height: 10px; padding: 2px; border: 2px solid var(--navy); }
 .xp-row i { display: block; width: 72%; height: 100%; background: var(--coral); }
-.about-panel { position: relative; overflow: hidden; }
+.about-panel { position: relative; display: flex; overflow: hidden; flex-direction: column; }
 .about-panel::after { content: '✦'; position: absolute; right: 18px; bottom: 14px; color: var(--coral); font-size: 42px; opacity: .35; }
+.about-body { display: flex; flex: 1; flex-direction: column; justify-content: center; align-items: flex-start; }
 .about-panel p { width: calc(100% - 46px); max-width: none; margin: 0 0 14px; color: var(--navy); font-size: clamp(17px, 1.25vw, 18px); font-weight: 500; line-height: 1.6; letter-spacing: .01em; text-align: left; text-wrap: pretty; }
 .about-panel p:last-child { margin-bottom: 0; }
 .about-panel p strong { font-weight: 700; }
