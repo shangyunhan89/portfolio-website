@@ -54,6 +54,34 @@ export const projects: Project[] = [
   },
 ];
 
+export const driftMartProjectLog = {
+  number: '01',
+  title: 'DriftMart',
+  subtitle: '3D Modelling · VR Interaction · UI/UX Design',
+  tags: ['UNITY', 'BLENDER', 'UI/UX', 'VR'],
+  overview: 'DriftMart is an immersive VR supermarket experience that combines cultural exploration with a calm, low-pressure shopping environment. Users can discover everyday products, local habits, and stories from different places while browsing at their own pace.',
+  images: {
+    hero: { path: '/images/driftmart/hero.png', label: 'Project hero image' },
+    discover: [
+      { path: '/images/driftmart/discover-01.png', label: 'Research and context' },
+      { path: '/images/driftmart/discover-02.png', label: 'Early discovery map' },
+      { path: '/images/driftmart/discover-03.png', label: 'Concept exploration' },
+    ],
+    design: [
+      { path: '/images/driftmart/design-01.png', label: 'Environment design' },
+      { path: '/images/driftmart/design-02.png', label: 'Supermarket modelling' },
+      { path: '/images/driftmart/design-03.png', label: 'UI and interaction visuals' },
+    ],
+    experience: [
+      { path: '/images/driftmart/experience-01.png', label: 'VR scene' },
+      { path: '/images/driftmart/experience-02.png', label: 'Interaction screenshot' },
+      { path: '/images/driftmart/experience-03.png', label: 'Character and NPC interaction' },
+    ],
+    outcome: { path: '/images/driftmart/outcome.png', label: 'Final project image' },
+  },
+  outcome: 'DriftMart brings cultural discovery and calm interaction into a playful VR environment designed for unhurried exploration.',
+};
+
 export const skills = [
   { name: 'UNITY', icon: '/icons/unity.png' },
   { name: 'BLENDER', icon: '/icons/blender.png' },
